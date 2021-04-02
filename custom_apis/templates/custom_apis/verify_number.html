@@ -14,7 +14,7 @@
     <div class="card">
         <h5 class="card-header">TOES USER VERIFICATION</h5>
         <div class="card-body">
-          <h5 class="card-title">Enter The OTP Recieved Here!!</h5>
+          <h5 class="card-title">Enter The Registered Phone No. Here!!</h5>
           <p class="card-text">
               
             <form method="POST">
@@ -32,11 +32,11 @@
           {% endfor %}
 
                   <br>
-                  <input name="otp" class="form-control" placeholder="Enter OTP">
+                  <input name="phone" class="form-control" placeholder="Phone No.">
                 </div>
               
 
-                <a href="{url 'reset'}"><button type="submit" class="btn btn-primary">Submit</button><a>
+                <a href="{url 'sendotp'}"><button type="submit" class="btn btn-primary">Send OTP</button><a>
               </form>
           </p>
 

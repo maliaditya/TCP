@@ -2,7 +2,7 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 from .models import *
 from rest_framework import generics,serializers
 from . models import (
-    User,WorkerDetails,JobDetails, Categories,
+    User,WorkerDetails,JobDetails, Categories, EmergencyDetails,
     StatusMaster, RecruitersRequests, WorkersRequests,ProfileImage , 
     )
 
@@ -15,7 +15,7 @@ class ResetPasswordSerializer(serializers.Serializer):
 class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('counter','isVerified','is_superuser','is_admin','username','password',
+        fields = ('counter','isblocked','is_superuser','is_admin','username','password',
                         'dob','gender','aadhar_no', 'profile_image','phone','first_name','last_name','smartphone')
 
 class WorkerDetailsSerializer(serializers.ModelSerializer):
@@ -59,4 +59,11 @@ class WorkersRequestsSerializer(serializers.ModelSerializer):
 class ProfileImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileImage
+        fields = '__all__'
+
+
+
+class EmergencyDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmergencyDetails
         fields = '__all__'

@@ -5,11 +5,16 @@ from .requests_views import recruiters_requests, wokers_requests
 from .status_update_views import recruiters_response, workers_response
 from .recruiter_workers_response_views import display_workers_responses,display_recruiters_responses
 from .verification_views import SendOtp
-from .forgot_password_views import  enter_otp,passreset
+from .forgot_password_views import  enter_otp,passreset, verify_phone
 from .admin_api_views import get_worker_count
 from .profile_image_views import retrive_profileimage
+from .otp_views import send_otp
+from .admin_crud_views import block,delete1
+from .emergency_details import emergency
+
 
 urlpatterns =[
+
     #Worker_Details
     path('category/<str:category>/', display_by_category ),
     path('allcategories/', display_all ),
@@ -33,18 +38,32 @@ urlpatterns =[
 
     #verification
     path("user/<phone>/", SendOtp.as_view(), name="OTP Gen"),
-    path("otp/", enter_otp),
+    path("otp/", enter_otp, name="enterotp"),
 
     #profileImage
     path("get/image/<int:user_id>", retrive_profileimage),
 
     #Template
-    path("reset_password/<int:phone>", passreset),
+    path("reset_password/", passreset , name="reset"),
 
 
     #without smartphones
     path("withoutsmartphone/" , display_all_withoutsmartphone),
 
     #admin api
-    path("worker_count/", get_worker_count),  
+    path("worker_count/", get_worker_count), 
+    
+    path("otp/<phone>/", send_otp,name="sendotp"),
+    
+    path("verify/phone/",verify_phone),
+
+
+    #admin crud
+    path("block/<int:st>/<int:user_id>",block),
+    path("delete/<int:user_id>",delete1),
+
+    #emergency
+    path("get/emergency/<int:user_id>",emergency)
+
+    
 ]

@@ -2,14 +2,13 @@ from django.db import models
 from django.contrib.auth.models import (
 	BaseUserManager, AbstractBaseUser, AbstractUser
 )
-
 ''' For Storing Basic User Information ''' 
 
 class User(AbstractUser):
     dob = models.CharField(max_length=255)
     phone = models.CharField(max_length=255,unique=True,blank=False)
     is_admin = models.BooleanField(default=False)
-    isVerified = models.BooleanField(default=False)
+    isblocked = models.BooleanField(default=False)
     gender = models.CharField(max_length=255)
     counter = models.IntegerField(default=0,blank=True,null=True)
     address = models.TextField(blank=False)
@@ -17,7 +16,7 @@ class User(AbstractUser):
     aadhar_no = models.CharField(max_length=255,default=None)
     
    
-    REQUIRED_FIELDS = ['counter','isVerified','is_superuser','is_admin','first_name','last_name','username','password',
+    REQUIRED_FIELDS = ['counter','isblocked','is_superuser','is_admin','first_name','last_name','username','password',
                         'dob','gender','aadhar_no','address','smartphone']
 
     USERNAME_FIELD = 'phone'
@@ -95,10 +94,13 @@ class WorkersRequests(models.Model):
     job_detail = models.ForeignKey(JobDetails, on_delete= models.CASCADE)
     worker = models.ForeignKey(User, on_delete=models.CASCADE)
     recruiter = models.IntegerField()
-    status = models.IntegerField(default = 1)  
-
+    status = models.IntegerField(default = 1) 
+    
 ''' All the work categories data will be stored in this table '''
 
 class Categories(models.Model):
     categories = models.CharField(max_length=255,unique=True)
 
+class EmergencyDetails(models.Model):
+    contact_no = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
