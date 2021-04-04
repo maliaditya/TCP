@@ -15,7 +15,7 @@ def display_job(request , user ):
     cursor = connection.cursor()
     cursor.execute(f'select category_1 , category_2 ,category_3  from authapp_workerdetails where authapp_workerdetails.user_id = {user}')
     row = cursor.fetchall()
-    cursor.execute('select first_name ,job_title,last_name, authapp_jobdetails.recruiter_id,authapp_jobdetails.id,authapp_jobdetails.job_Description,address from authapp_user INNER JOIN authapp_jobdetails ON authapp_user.id  = authapp_jobdetails.recruiter_id where  authapp_jobdetails.status <> 2')
+    cursor.execute('select first_name ,job_title,last_name, authapp_jobdetails.recruiter_id,authapp_jobdetails.id,authapp_jobdetails.job_description,address from authapp_user INNER JOIN authapp_jobdetails ON authapp_user.id  = authapp_jobdetails.recruiter_id where  authapp_jobdetails.status <> 2')
     row1 = cursor.fetchall()
     content = {}
     payload = []
@@ -40,7 +40,7 @@ def display_job(request , user ):
 @permission_classes([IsAuthenticated])
 def display_recruiter_job(request , recruiterid):
     cursor = connection.cursor()
-    cursor.execute(f'select first_name, address, job_Description ,last_name, authapp_jobdetails.id, authapp_jobdetails.job_title from authapp_user INNER JOIN authapp_jobdetails on authapp_user.id = authapp_jobdetails.recruiter_id where authapp_jobdetails.recruiter_id = {recruiterid}')
+    cursor.execute(f'select first_name, address, job_description ,last_name, authapp_jobdetails.id, authapp_jobdetails.job_title from authapp_user INNER JOIN authapp_jobdetails on authapp_user.id = authapp_jobdetails.recruiter_id where authapp_jobdetails.recruiter_id = {recruiterid}')
     row = cursor.fetchall()
     content = {}
     payload = []
@@ -49,7 +49,7 @@ def display_recruiter_job(request , recruiterid):
                        'fname' : result[0],
                        'lname'  : result[3],
                        'address' : result[1],
-                       'job_Description' : result[2],
+                       'job_description' : result[2],
                        'job_id' : result[4],
                        'job_title' : result[5],
                        

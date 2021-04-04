@@ -69,7 +69,7 @@ class StatusMaster(models.Model):
 '''
 class JobDetails(models.Model):
     job_title = models.CharField(max_length=255)
-    job_Description = models.CharField(max_length=300)
+    job_description = models.CharField(max_length=300)
     recruiter = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.IntegerField(default = 1) 
 
