@@ -14,8 +14,10 @@ import json
 @permission_classes([IsAuthenticated])
 def retrive_profileimage(request,user_id):
     cursor=connection.cursor()
-    #cursor.execute(f"select * from authapp_worker_Details where category_1 = '{category}' OR category_2 = '{category}' OR category_3 = '{category}' ")
-    #cursor.execute(f'select job_description, job_title, worker_id,amount from authapp_recruitersrequests r , authapp_jobdetails j where r.recruiter ={recruiter_id} and j.recruiter_id = r.recruiter')
+    # cursor.execute(f"select * from authapp_worker_Details where category_1 = '{category}' OR category_2 = '{
+    # category}' OR category_3 = '{category}' ") cursor.execute(f'select job_description, job_title, worker_id,
+    # amount from authapp_recruitersrequests r , authapp_jobdetails j where r.recruiter ={recruiter_id} and
+    # j.recruiter_id = r.recruiter')
     cursor.execute(f'select profile_image from authapp_profileimage where user_id= {user_id}')
     row = cursor.fetchall()
     content = {}
